@@ -1,5 +1,4 @@
 # awesome ref  https://github.com/mjoyce6500/profile
-
 # customize path and shortcuts
 if (!(test-path alias:note)) {New-Alias -Name note -Value 'C:\Program Files\Notepad++\notepad++.exe'}
 $me = $env:USERPROFILE
@@ -34,17 +33,17 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
  ELSE { $ws.height = $maxws.height }
  $host.ui.RawUI.Set_WindowSize($ws)
 
-# testing connectivity to GitHub
-$url = 'https://github.com/mjoyce6500'
+# testing connectivity to Google
+$url = 'https://google.com'
 Try{$req = Invoke-WebRequest -UseBasicParsing -Method Head -Uri $url -ErrorAction Stop} 
  Catch {$message = $_.message.exception 
      Write-Warning $message}
 If ($req.statuscode -eq 200) {
-    Write-Host "Able to connect to GitHub. `n` " }
+    Write-Host "Able to connect to Google. `n` " }
 Else {
-    Write-Error "FAILED to connect to GitHub!  " 
+    Write-Error "FAILED to connect to Google!  " 
 	Write-Error "Check internet connection first`n` " } 
-cd $bbgit
+cd $tmp
 Write-Host 'List of quick dir''s'
 Write-Host '$me' "-`t`t$me"
 Write-Host '$downloads' "-`t$downloads"
