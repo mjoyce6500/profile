@@ -43,11 +43,7 @@ Else {
 	Write-Host "Check Internet connection `n` " -ForegroundColor Red} 
 
 # Chocolatey profile
-if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1")}
-if (Test-Path($ChocolateyProfile) -ErrorAction SilentlyContinue) {
-  Import-Module "$ChocolateyProfile"
-  write-host "-- Chocolatey profile found and imported. `n` " -ForegroundColor Gray
-}
+if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1"); Import-Module "$ChocolateyProfile"}
 
 Write-Host 'List of quick dir''s'
 Write-Host '$me' "-`t`t$me"
