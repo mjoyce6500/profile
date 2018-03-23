@@ -33,17 +33,22 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
  ELSE { $ws.height = $maxws.height }
  $host.ui.RawUI.Set_WindowSize($ws)
 
-# testing connectivity to Google
-$url = 'https://google.com'
-Try{$req = Invoke-WebRequest -UseBasicParsing -Method Head -Uri $url -ErrorAction Stop} 
- Catch {$message = $_.message.exception 
-     Write-Warning $message}
-If ($req.statuscode -eq 200) {
-    Write-Host "Able to connect to Google. `n` " }
+# testing connectivity to GitHub
+$url = 'https://github.com'
+$response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
+If ($response.StatusCode -eq 200) {
+    Write-Host "-- Able to connect to GitHub." -ForegroundColor Green }
 Else {
-    Write-Error "FAILED to connect to Google!  " 
-	Write-Error "Check internet connection first`n` " } 
-cd $tmp
+    Write-Host "FAILED to connect to GitHub!  " -ForegroundColor Red 
+	Write-Host "Check Internet connection `n` " -ForegroundColor Red} 
+
+# Chocolatey profile
+if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1")}
+if (Test-Path($ChocolateyProfile) -ErrorAction SilentlyContinue) {
+  Import-Module "$ChocolateyProfile"
+  write-host "-- Chocolatey profile found and imported. `n` " -ForegroundColor Gray
+}
+
 Write-Host 'List of quick dir''s'
 Write-Host '$me' "-`t`t$me"
 Write-Host '$downloads' "-`t$downloads"
