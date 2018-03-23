@@ -33,14 +33,15 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
  ELSE { $ws.height = $maxws.height }
  $host.ui.RawUI.Set_WindowSize($ws)
 
-# testing connectivity to GitHub
-$url = 'https://github.com'
+# testing connectivity to Internet
+$url = 'https://bloomberg.com'
 $response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
 If ($response.StatusCode -eq 200) {
-    Write-Host "-- Able to connect to GitHub." -ForegroundColor Green }
+    Write-Host "-- Internet looks good, able to connect to" $url -ForegroundColor Green }
 Else {
-    Write-Host "FAILED to connect to GitHub!  " -ForegroundColor Red 
-	Write-Host "Check Internet connection `n` " -ForegroundColor Red} 
+    Write-Host "FAILED to connect to " $url -ForegroundColor Red 
+	Write-Host "Check Internet connection `n` " -ForegroundColor Red
+	Write-Host "Error Code:"  $response.StatusCode} 
 
 # Chocolatey profile
 if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1"); Import-Module "$ChocolateyProfile"}
