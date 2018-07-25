@@ -34,7 +34,7 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
  $host.ui.RawUI.Set_WindowSize($ws)
 
 # testing connectivity to Internet
-$url = 'https://bloomberg.com'
+$url = 'https://google.com'
 $response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
 If ($response.StatusCode -eq 200) {
     Write-Host "-- Internet looks good, able to connect to" $url -ForegroundColor Green }
