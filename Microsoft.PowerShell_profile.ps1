@@ -4,6 +4,8 @@ if (!(test-path alias:note)) {New-Alias -Name note -Value 'C:\Program Files\Note
 $me = $env:USERPROFILE
 $downloads = (join-path $env:USERPROFILE 'downloads')
 $tmp = 'c:\tmp'
+$pubgit = 'c:\publicGitHub'
+$run = (join-path $downloads \code)
 
 # customize the powershell window
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
@@ -42,7 +44,7 @@ Else {
     Write-Host "FAILED to connect to " $url -ForegroundColor Red 
 	Write-Host "Check Internet connection `n` " -ForegroundColor Red
 	Write-Host "Error Code:"  $response.StatusCode} 
-
+cd $pubgit
 # Chocolatey profile
 if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1"); Import-Module "$ChocolateyProfile"}
 
@@ -50,4 +52,6 @@ Write-Host 'List of quick dir''s'
 Write-Host '$me' "-`t`t$me"
 Write-Host '$downloads' "-`t$downloads"
 Write-Host '$tmp' "-`t`t$tmp"
+Write-Host '$pubgit' "-`t$pubgit"
+Write-Host '$run' "-`t`t$run"
 (get-date).DateTime
