@@ -36,7 +36,7 @@ $ws = $host.ui.RawUI.WindowSize
 if ($maxws.width -ge 85)   { $ws.width = 120 }
 else { $ws.height = $maxws.height }
 
-if ($maxws.height -ge 55)  { $ws.height = 50 }
+if ($maxws.height -ge 65)  { $ws.height = 65 }
 else { $ws.height = $maxws.height }
 $host.ui.RawUI.Set_WindowSize($ws)
 
