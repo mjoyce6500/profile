@@ -11,6 +11,7 @@ $pubgit = 'C:\publicGitHub'
 $tmp = 'c:\tmp'
 $run = (join-path $downloads \code)
 $env:CHEF_ORG = "engineering"
+$defenderOptions = Get-MpComputerStatus
 
 # customize the powershell window
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
@@ -28,7 +29,17 @@ $Host.PrivateData.ProgressBackgroundColor = $bckgrnd
 [console]::BufferHeight=5000
 [console]::BufferWidth=120 
 Clear-Host
+cd $pubgit
 $PSVer = $Host.Version.Major
+$maxWS = $host.UI.RawUI.Get_MaxWindowSize()
+$ws = $host.ui.RawUI.WindowSize
+if ($maxws.width -ge 85)   { $ws.width = 120 }
+else { $ws.height = $maxws.height }
+
+if ($maxws.height -ge 55)  { $ws.height = 50 }
+else { $ws.height = $maxws.height }
+$host.ui.RawUI.Set_WindowSize($ws)
+
 # Check if Elevated
 $WindowsIdentity = [system.security.principal.windowsidentity]::GetCurrent()
 $Principal = New-Object System.Security.Principal.WindowsPrincipal($WindowsIdentity)
@@ -43,15 +54,7 @@ else
 {
 [console]::Title =  " $whoami           |       This is PowerShell  $PSVer       |         $now"
 }
-$maxWS = $host.UI.RawUI.Get_MaxWindowSize()
- $ws = $host.ui.RawUI.WindowSize
- IF($maxws.width -ge 85)
-   { $ws.width = 120 }
- ELSE { $ws.height = $maxws.height }
- IF($maxws.height -ge 55)
-   { $ws.height = 50 }
- ELSE { $ws.height = $maxws.height }
- $host.ui.RawUI.Set_WindowSize($ws)
+
 
 # testing VPN connectivity 
 # $url = 'https://url.dev.company.com'
@@ -65,19 +68,40 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
 # testing connectivity to Google Drive
 $url = 'https://drive.google.com/drive/my-drive'
 $response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
-If ($response.StatusCode -eq 200) {
+if ($response.StatusCode -eq 200) {
     Write-Host "-- Able to connect to Google Drive." -ForegroundColor Green }
-Else {
+else {
     Write-Host "FAILED to connect to Google Drive!  " -ForegroundColor Red 
 	Write-Host "Check Internet connection or shell proxy config first`n` " -ForegroundColor Red} 
-	
-cd $pubgit
+
 # Chocolatey profile
-if (test-path $env:ChocolateyInstall) {$ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1")}
-if (Test-Path($ChocolateyProfile) -ErrorAction SilentlyContinue) {
-  Import-Module "$ChocolateyProfile"
-  write-host "-- Chocolatey profile found and imported. " -ForegroundColor Gray
-}
+if (test-path $env:ChocolateyInstall) 
+    {
+    $ChocolateyProfile = (join-path $env:ChocolateyInstall "\helpers\chocolateyProfile.psm1")
+    }
+if (Test-Path($ChocolateyProfile) -ErrorAction SilentlyContinue)
+    {
+    Import-Module "$ChocolateyProfile"
+    write-host "-- Chocolatey profile found and imported. " -ForegroundColor Gray
+    }
+if ((-not([string]::IsNullOrEmpty($defenderOptions))) -and ($Principal.IsInRole($AdminRole)))
+    {
+    Write-Host "Since you are running as ADMINISTRATOR we are configuring anti-Virus settings in Choco" -ForegroundColor Cyan
+    Write-Host "Windows Defender found on host: " -ForegroundColor Cyan -NoNewline
+    Write-Host $env:COMPUTERNAME -ForegroundColor White
+    Write-Host "Windows Defender Enabled? " -ForegroundColor Cyan -NoNewline
+    Write-Host $defenderOptions.AntiVirusEnabled -ForegroundColor White
+    Write-Host "Setting Chocolatey to use Windows Defender." -ForegroundColor Cyan
+    choco feature enable -n viruscheck
+    choco config set genericVirusScannerPath "'C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.1807.18075-0\MPCmdRun.exe' -Scan"
+    }
+else
+    {
+    Write-Host "Your not running as ADMINISTRATOR or Windows Defender was not found running on host: " -ForegroundColor Cyan -NoNewline
+    Write-Host $env:COMPUTERNAME -ForegroundColor White
+    Write-Host " so we are not configuring anti-Virus settings in choco" -ForegroundColor Cyan
+    }
+
 # Chef org
 if ($env:CHEF_ORG) {
         Write-host "-- CHEF_ORG environment var set to '$env:CHEF_ORG' `n` " -ForegroundColor Gray
@@ -90,3 +114,4 @@ Write-Host '$downloads' "-`t$downloads"
 Write-Host '$pubgit' "-`t$pubgit"
 Write-Host '$tmp' "-`t`t$tmp"
 Write-Host '$run' "-`t`t$run" `n
+(Get-Date).DateTime
