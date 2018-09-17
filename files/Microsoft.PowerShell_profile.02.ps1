@@ -7,7 +7,6 @@ $downloads = (join-path $env:USERPROFILE 'downloads')
 $tmp = 'c:\tmp'
 $pubgit = 'c:\publicGitHub'
 $run = (join-path $downloads \code)
-ls
 # customize the powershell window
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
 $Host.UI.RawUI.ForegroundColor = 'Yellow'
@@ -31,8 +30,8 @@ $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
  IF($maxws.width -ge 85)
    { $ws.width = 120 }
  ELSE { $ws.height = $maxws.height }
- IF($maxws.height -ge 42)
-   { $ws.height = 55 }
+ IF($maxws.height -ge 39)
+   { $ws.height = 65 }
  ELSE { $ws.height = $maxws.height }
  $host.ui.RawUI.Set_WindowSize($ws)
 
