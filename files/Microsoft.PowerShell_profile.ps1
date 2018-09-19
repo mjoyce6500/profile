@@ -4,7 +4,7 @@
 # customize path and shortcuts
 if (!(test-path alias:note)) {New-Alias -Name note -Value 'C:\Program Files\Notepad++\notepad++.exe'}
 if (!(test-path alias:mind)) {New-Alias -Name mind -Value 'C:\Program Files (x86)\FreeMind\FreeMind.exe'}
-if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm 2018.2\bin\pycharm.exe'}
+if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm Community Edition 2018.2.3\bin\pycharm64.exe'}
 $me = $env:USERPROFILE
 $downloads = (join-path $env:USERPROFILE 'downloads')
 $pubgit = 'C:\publicGitHub'
