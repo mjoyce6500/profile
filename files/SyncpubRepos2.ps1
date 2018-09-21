@@ -5,21 +5,24 @@ function input-path {
     [CmdletBinding()]
     Param(
       [Parameter(Mandatory=$True,Position=1)]
-      [string]$pubgit
+      [string]$bbgit
     )
 }
-if (!(Test-Path $pubgit))  {input-path}
+
+if (!(Test-Path $bbgit))  {input-path}
+
 $StopWatch.Start()
-$repos=((Get-ChildItem -Directory $pubgit).Name)
+$repos=((Get-ChildItem -Directory $bbgit).Name)
 foreach ($repo in $repos){
     write-host "-----------------"
     write-host "Syncing $repo...."
-    cd $pubgit\$repo
+    cd $bbgit\$repo
     $git=git remote
     if ($git -contains "upstream"){
         $t1 = Measure-Command {git pull upstream master}
         $t2 = Measure-Command { git push}
         $t3 = $t1 + $t2
+ #       $t1 = [Math]::Round(($t1)
         Write-Host "Took "  $t1.TotalSeconds.ToString("#,###.00") " seconds to pull, and " -NoNewline
         Write-Host $t2.TotalSeconds.ToString("#,###.00") " seconds to push" -NoNewline
         Write-Host " for a total of " $t3.TotalSeconds.ToString("#,###.00") " seconds" -ForegroundColor White
