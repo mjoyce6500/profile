@@ -105,15 +105,28 @@ else
     }
 
 # Chef org
-if ($env:CHEF_ORG) {
-        Write-host "-- CHEF_ORG environment var set to '$env:CHEF_ORG' `n` " -ForegroundColor Gray
-} else {
-        Write-host " (x) Unable to set CHEF_ORG envar correctly - please configure manually." -ForegroundColor Red
-}
+if ($env:CHEF_ORG)
+    {
+    Write-host "-- CHEF_ORG environment var set to '$env:CHEF_ORG'  " -ForegroundColor Gray
+    } 
+else
+    {
+    Write-host " (x) Unable to set CHEF_ORG envar correctly - please configure manually." -ForegroundColor Red
+    }
+# PowerShellGet is a toolset from MSFT @ https://github.com/PowerShell/PowerShellGet
+If (Test-Path $pubgit\PowerShellGet)
+    { 
+    $PowerShellGet = (join-path $pubgit\PowerShellGet "\PowerShellGet\PSModule.psm1")
+    Write-Host "Checking if PowerShellGet module is on " -ForegroundColor Cyan -NoNewline
+    Write-Host $env:COMPUTERNAME -ForegroundColor White
+    Import-Module "$PowerShellGet"
+    write-host "-- PowerShellGet found and imported. `n" -ForegroundColor Gray
+    }
+
 Write-Host 'List of quick dir''s'
 Write-Host '$me' "-`t`t$me"
 Write-Host '$downloads' "-`t$downloads"
 Write-Host '$pubgit' "-`t$pubgit"
 Write-Host '$tmp' "-`t`t$tmp"
-Write-Host '$run' "-`t`t$run" `n
-(Get-Date).DateTime
+Write-Host '$run' "-`t`t$run" 
+Write-Host $now "`n"
