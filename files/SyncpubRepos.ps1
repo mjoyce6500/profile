@@ -1,6 +1,7 @@
 ﻿# This sync's local copy from Master repo and pushes local copy to my fork
 # Sample usage is $run\SyncRepos.ps1
 $stopwatch =  [system.diagnostics.stopwatch]::StartNew()
+$repocount = 0
 function input-path {
     [CmdletBinding()]
     Param(
@@ -15,6 +16,7 @@ foreach ($repo in $repos){
     write-host "-----------------"
     write-host "Syncing $repo...."
     cd $pubgit\$repo
+    $repocount = $repocount + 1
     $git=git remote
     if ($git -contains "upstream"){
         $t1 = Measure-Command {git pull upstream master}
@@ -29,5 +31,5 @@ foreach ($repo in $repos){
         }
 }
 cd ..
-Write-Host "`n This took " $StopWatch.Elapsed.TotalSeconds.ToString("#,###.00") " seconds to sync all repos" -ForegroundColor White
+Write-Host "`n This took " $StopWatch.Elapsed.TotalSeconds.ToString("#,###.00") " seconds to sync all " $repocount "repos" -ForegroundColor White
 $stopwatch.Stop()
