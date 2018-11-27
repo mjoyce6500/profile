@@ -4,7 +4,7 @@
 # customize path and shortcuts
 if (!(test-path alias:note)) {New-Alias -Name note -Value 'C:\Program Files\Notepad++\notepad++.exe'}
 if (!(test-path alias:mind)) {New-Alias -Name mind -Value 'C:\Program Files (x86)\FreeMind\FreeMind.exe'}
-if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm Community Edition 2018.2.3\bin\pycharm64.exe'}
+if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm Community Edition 2018.2.5\bin\pycharm64.exe'}
 if (!(test-path alias:python)) {New-Alias -Name python -Value 'C:\Python37\python.exe'}
 
 $me = $env:USERPROFILE
@@ -117,9 +117,9 @@ else
     Write-host " (x) Unable to set CHEF_ORG envar correctly - please configure manually." -ForegroundColor Red
     }
 # PowerShellGet is a toolset from MSFT @ https://github.com/PowerShell/PowerShellGet
-If (Test-Path $pubgit\PowerShellGet)
+If (Test-Path $pubgit\PowerShellGet\Utilities)
     { 
-    $PowerShellGet = (join-path $pubgit\PowerShellGet "\PowerShellGet\PSModule.psm1")
+    $PowerShellGet = (join-path $pubgit\PowerShellGet\Utilities\OfflinePowerShellGet "\OfflinePowerShellGetSetup.psm1")
     Write-Host "Checking if PowerShellGet module is on " -ForegroundColor Cyan -NoNewline
     Write-Host $env:COMPUTERNAME -ForegroundColor White
     Import-Module "$PowerShellGet"
