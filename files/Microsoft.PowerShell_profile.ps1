@@ -1,4 +1,4 @@
-# Powershell profile version 0.3  https://github.com/mjoyce6500/profile/releases
+# Powershell profile version 0.4  https://github.com/mjoyce6500/profile/releases
 # awesome ref  https://github.com/crazy54/work-related/blob/master/Profile.ps1
 
 # customize path and shortcuts
@@ -71,7 +71,10 @@ else
 $url = 'https://drive.google.com/drive/my-drive'
 $response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
 if ($response.StatusCode -eq 200) {
-    Write-Host "-- Able to connect to Google Drive." -ForegroundColor Green }
+    Write-Host "-- Able to connect to Google Drive.  " -ForegroundColor Green  -NoNewline
+    Write-Host $url -ForegroundColor White  -NoNewline
+    Write-Host "   Response code:  " -ForegroundColor Green -NoNewline
+    Write-Host $response.StatusCode
 else {
     Write-Host "FAILED to connect to Google Drive!  " -ForegroundColor Red 
 	Write-Host "Check Internet connection or shell proxy config first`n` " -ForegroundColor Red} 
@@ -122,11 +125,11 @@ If (Test-Path $pubgit\PowerShellGet)
     Import-Module "$PowerShellGet"
     write-host "-- PowerShellGet found and imported. `n" -ForegroundColor Gray
     }
-
-Write-Host 'List of quick dir''s'
-Write-Host '$me' "-`t`t$me"
-Write-Host '$downloads' "-`t$downloads"
-Write-Host '$pubgit' "-`t$pubgit"
-Write-Host '$tmp' "-`t`t$tmp"
-Write-Host '$run' "-`t`t$run" 
-Write-Host $now "`n"
+$result = New-Object -TypeName PSObject
+$result | Add-Member -MemberType Noteproperty -Name '$me' -Value $($me)
+$result | Add-Member -MemberType Noteproperty -Name '$downloads' -Value $($downloads)
+$result | Add-Member -MemberType Noteproperty -Name '$pubgit' -Value $($pubgit)
+$result | Add-Member -MemberType Noteproperty -Name '$tmp' -Value $($tmp)
+$result | Add-Member -MemberType Noteproperty -Name '$run' -Value $($run)
+$result | Add-Member -MemberType Noteproperty -Name Date -Value $($date)
+$result | Format-List
