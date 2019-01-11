@@ -74,7 +74,7 @@ if ($response.StatusCode -eq 200) {
     Write-Host "-- Able to connect to Google Drive.  " -ForegroundColor Green  -NoNewline
     Write-Host $url -ForegroundColor White  -NoNewline
     Write-Host "   Response code:  " -ForegroundColor Green -NoNewline
-    Write-Host $response.StatusCode
+    Write-Host $response.StatusCode }
 else {
     Write-Host "FAILED to connect to Google Drive!  " -ForegroundColor Red 
 	Write-Host "Check Internet connection or shell proxy config first`n` " -ForegroundColor Red} 
