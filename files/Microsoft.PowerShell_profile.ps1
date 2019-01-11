@@ -14,10 +14,11 @@ $tmp = 'c:\tmp'
 $run = (join-path $downloads \code)
 $env:CHEF_ORG = "engineering"
 $defenderOptions = Get-MpComputerStatus
+$date = (Get-Date).DateTime
 
 # customize the powershell window
-$Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
 $Host.UI.RawUI.ForegroundColor = 'Yellow'
+$Host.ui.rawui.BackgroundColor = ($bckgrnd = 'Black')
 $Host.PrivateData.ErrorForegroundColor = 'white'
 $Host.PrivateData.ErrorBackgroundColor = 'red'
 $Host.PrivateData.WarningForegroundColor = 'Magenta'
@@ -32,7 +33,7 @@ $Host.PrivateData.ProgressBackgroundColor = $bckgrnd
 [console]::BufferWidth=120 
 Clear-Host
 cd $pubgit
-$PSVer = $Host.Version.Major
+$PSVer =  $Host.Version.Major.ToString() + "." + $Host.Version.Minor.ToString()
 $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
 $ws = $host.ui.RawUI.WindowSize
 if ($maxws.width -ge 85)   { $ws.width = 120 }
