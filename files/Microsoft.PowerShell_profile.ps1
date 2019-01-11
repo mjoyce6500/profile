@@ -52,11 +52,12 @@ $whoami= $WindowsIdentity.Name
 $now= get-date -Format D
 if ($Principal.IsInRole($AdminRole))
 {
-[console]::Title = " $whoami  running as: ADMINISTRATOR       |     Windows $OSver     |      PowerShell  $PSVer       |       $now"
+[console]::Title = " $whoami  running as: ADMINISTRATOR    |    Windows $OSver    |    PowerShell  $PSVer    |    $now"
+function prompt {"[ADMIN]  $(get-location)> "}
 }
 else
 {
-[console]::Title =  " $whoami     |     Windows $OSver       |       PowerShell  $PSVer       |         $now"
+[console]::Title =  " $whoami    |    Windows $OSver    |    PowerShell  $PSVer    |    $now"
 }
 
 
