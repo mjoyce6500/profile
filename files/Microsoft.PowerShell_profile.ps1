@@ -33,7 +33,8 @@ $Host.PrivateData.ProgressBackgroundColor = $bckgrnd
 [console]::BufferWidth=120 
 Clear-Host
 cd $pubgit
-$PSVer =  $Host.Version.Major.ToString() + "." + $Host.Version.Minor.ToString()
+$OSver = [System.Environment]::OSVersion.Version.Major.ToString() + "." + [System.Environment]::OSVersion.Version.Minor.ToString() + "." + [System.Environment]::OSVersion.Version.Build.ToString()
+$PSVer = $Host.Version.Major.ToString() + "." + $Host.Version.Minor.ToString()
 $maxWS = $host.UI.RawUI.Get_MaxWindowSize()
 $ws = $host.ui.RawUI.WindowSize
 if ($maxws.width -ge 85)   { $ws.width = 120 }
@@ -51,11 +52,11 @@ $whoami= $WindowsIdentity.Name
 $now= get-date -Format D
 if ($Principal.IsInRole($AdminRole))
 {
-[console]::Title = " $whoami  running as: ADMINISTRATOR         |      This is PowerShell  $PSVer       |       $now"
+[console]::Title = " $whoami  running as: ADMINISTRATOR       |     Windows $OSver     |      PowerShell  $PSVer       |       $now"
 }
 else
 {
-[console]::Title =  " $whoami           |       This is PowerShell  $PSVer       |         $now"
+[console]::Title =  " $whoami     |     Windows $OSver       |       PowerShell  $PSVer       |         $now"
 }
 
 
