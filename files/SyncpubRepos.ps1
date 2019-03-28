@@ -14,7 +14,7 @@ $StopWatch.Start()
 $repos=((Get-ChildItem -Directory $pubgit).Name)
 foreach ($repo in $repos){
     write-host "-----------------"
-    write-host "Syncing $repo...."
+    write-host "Syncing $repo...." -ForegroundColor Green
     cd $pubgit\$repo
     $repocount = $repocount + 1
     $git=git remote
@@ -22,9 +22,9 @@ foreach ($repo in $repos){
         $t1 = Measure-Command {git pull upstream master}
         $t2 = Measure-Command { git push}
         $t3 = $t1 + $t2
-        Write-Host "Took "  $t1.TotalSeconds.ToString("#,###.00") " seconds to pull, and " -NoNewline
-        Write-Host $t2.TotalSeconds.ToString("#,###.00") " seconds to push" -NoNewline
-        Write-Host " for a total of " $t3.TotalSeconds.ToString("#,###.00") " seconds" -ForegroundColor White
+        Write-Host "Took "  $t1.TotalSeconds.ToString("#,###.00") " seconds to pull, and " -NoNewline -ForegroundColor Yellow
+        Write-Host $t2.TotalSeconds.ToString("#,###.00") " seconds to push for a " -NoNewline -ForegroundColor Yellow
+        Write-Host " total of " $t3.TotalSeconds.ToString("#,###.00") " seconds" -ForegroundColor White
         } else {
         write-host "No upstream master, continuing to 'push'"
         git push
