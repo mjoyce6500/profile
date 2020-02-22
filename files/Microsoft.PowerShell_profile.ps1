@@ -4,7 +4,7 @@
 # customize path and shortcuts
 if (!(test-path alias:note)) {New-Alias -Name note -Value 'C:\Program Files\Notepad++\notepad++.exe'}
 if (!(test-path alias:mind)) {New-Alias -Name mind -Value 'C:\Program Files (x86)\FreeMind\FreeMind.exe'}
-if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm Community Edition 2018.3.3\bin\pycharm64.exe'}
+if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program Files (x86)\JetBrains\PyCharm Community Edition 2019.3\bin\pycharm64.exe'}
 if (!(test-path alias:python)) {New-Alias -Name python -Value 'C:\Python37\python.exe'}
 
 $me = $env:USERPROFILE
