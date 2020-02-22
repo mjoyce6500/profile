@@ -237,7 +237,7 @@
         {
             "acrylicOpacity" : 0.8,
             "background" : "#012456",
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/powershell.jpg",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/powershell.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.2,
             "backgroundImageStretchMode" : "none",
@@ -254,14 +254,14 @@
             "name" : "PowerShell",
             "padding" : "0, 0, 0, 0",
             "snapOnInput" : true,
-            "startingDirectory" : "C:/pubgithub",
+            "startingDirectory" : "C:/publicGitHub",
             "tabTitle" : "PowerShell 5.1 no profile",
             "useAcrylic" : false
         },
         {
             "acrylicOpacity" : 0.9,
             "background" : "#012456",
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/powershell.jpg",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/powershell.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.1,
             "backgroundImageStretchMode" : "none",
@@ -283,7 +283,7 @@
         },
         {
             "acrylicOpacity" : 0.0,
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/maxresdefault.jpg",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/maxresdefault.jpg",
             "backgroundImageAlignment" : "bottomRight",
             "backgroundImageOpacity" : 0.2,
             "backgroundImageStretchMode" : "none",
@@ -306,7 +306,7 @@
         {
             "acrylicOpacity" : 0.9,
             "background" : "#002B36",
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/PythonBackground.jpg",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/PythonBackground.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.4,
             "backgroundImageStretchMode" : "none",
@@ -329,7 +329,7 @@
         {
             "acrylicOpacity" : 0.9,
             "background" : "#002B36",
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/LukeBobo.gif",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/LukeBobo.gif",
             "backgroundImageOpacity" : 0.4,
             "backgroundImageStretchMode" : "uniform",
             "closeOnExit" : true,
@@ -351,7 +351,7 @@
         {
             "acrylicOpacity" : 1.0,
             "background" :"#002B36",
-            "backgroundImage" :"C:/pubGitHub/profile/terminal/images/linux-on-windows.jpg",
+            "backgroundImage" :"C:/publicGitHub/profile/terminal/images/linux-on-windows.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.5,
             "backgroundImageStretchMode" :"none",
@@ -364,7 +364,7 @@
             "fontSize" : 11,
             "guid" : "{c6eaf9f4-32a7-5fdc-b5cf-066e8a4b1e40}",
             "historySize" : 9001,
-            "icon" : "C:/pubGitHub/profile/terminal/images/Ubuntu.png",
+            "icon" : "C:/publicGitHub/profile/terminal/images/Ubuntu.png",
             "name" : "Ubuntu-18.04",
             "padding" : "2, 1, 0, 0",
             "snapOnInput" : true,
@@ -374,7 +374,7 @@
         },
         {
             "acrylicOpacity" : 0.9,
-            "backgroundImage" : "C:/pubGitHub/profile/terminal/images/UK-Made-Raspberry-Pi-3-Model-B.jpg",
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/UK-Made-Raspberry-Pi-3-Model-B.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.3,
             "backgroundImageStretchMode" : "none",
@@ -387,8 +387,30 @@
             "fontSize" : 10,
             "guid" : "{d3b9fdb4-9b8f-4735-97fe-1aed5e648701}",
             "historySize" : 9001,
-            "icon" : "ms-appx:///ProfileIcons/{9acb9455-ca41-5af7-950f-6bca1bc9722f}.scale-100.png",
+            "icon" : "C:/publicGitHub/profile/terminal/images/Raspberry_Pi_Logo.png",
             "name" : "home Pi",
+            "padding" : "5,5,5,5",
+            "snapOnInput" : true,
+            "startingDirectory" : "%USERPROFILE%",
+            "useAcrylic" : true
+        },
+        {
+            "acrylicOpacity" : 0.9,
+            "backgroundImage" : "C:/publicGitHub/profile/terminal/images/UK-Made-Raspberry-Pi-3-Model-B.jpg",
+            "backgroundImageAlignment" : "center",
+            "backgroundImageOpacity" : 0.3,
+            "backgroundImageStretchMode" : "none",
+            "closeOnExit" : true,
+            "colorScheme" : "One Half Dark",
+            "commandline" : "ssh pi@192.168.1.123",
+            "cursorColor" : "#F1F441",
+            "cursorShape" : "underscore",
+            "fontFace" : "Consolas",
+            "fontSize" : 10,
+            "guid" : "{d3b9fdb4-9b8f-4735-97fe-1aed5e648702}",
+            "historySize" : 9001,
+            "icon" : "C:/publicGitHub/profile/terminal/images/Raspberry_Pi_Logo.png",
+            "name" : "Dan's Pi",
             "padding" : "5,5,5,5",
             "snapOnInput" : true,
             "startingDirectory" : "%USERPROFILE%",
@@ -416,7 +438,7 @@
         {
             "acrylicOpacity" : 1.0,
             "background" :"#002B36",
-            "backgroundImage" :"C:/pubGitHub/profile/terminal/images/RH_Fedora_logo.jpg",
+            "backgroundImage" :"C:/publicGitHub/profile/terminal/images/RH_Fedora_logo.jpg",
             "backgroundImageAlignment" : "center",
             "backgroundImageOpacity" : 0.5,
             "backgroundImageStretchMode" :"none",
@@ -430,7 +452,7 @@
             "guid": "{d3f31bee-5823-5ed8-8e04-f31ed54f2cd9}",
             "hidden": false,
             "historySize" : 9001,
-            "icon" : "C:/pubGitHub/profile/terminal/images/RH_Fedora_logo.jpg",
+            "icon" : "C:/publicGitHub/profile/terminal/images/RH_Fedora_logo.jpg",
             "name" : "fedoraremix",
             "padding" : "2, 1, 0, 0",
             "snapOnInput" : true,
@@ -443,6 +465,12 @@
             "hidden": false,
             "name": "Azure Cloud Shell",
             "source": "Windows.Terminal.Azure"
+        },
+        {
+            "guid": "{6e9fa4d2-a4aa-562d-b1fa-0789dc1f83d7}",
+            "hidden": false,
+            "name": "Legacy",
+            "source": "Windows.Terminal.Wsl"
         }
     ],
     "schemes" : 
