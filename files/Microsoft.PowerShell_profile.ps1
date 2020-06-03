@@ -8,8 +8,8 @@ if (!(test-path alias:pycharm)) {New-Alias -Name pycharm -Value 'C:\Program File
 if (!(test-path alias:python)) {New-Alias -Name python -Value 'C:\Python37\python.exe'}
 
 $me = $env:USERPROFILE
-$downloads = (join-path $env:USERPROFILE 'downloads')
-$pubgit = 'C:\publicGitHub'
+$downloads = (join-path $env:USERPROFILE 'Downloads')
+$pubgit = (join-path $env:USERPROFILE 'Git')
 $tmp = 'c:\tmp'
 $run = (join-path $downloads \code)
 $env:CHEF_ORG = "engineering"
@@ -60,26 +60,18 @@ else
 [console]::Title =  " $whoami    |    Windows $OSver    |    PowerShell  $PSVer    |    $now"
 }
 
-
-# testing VPN connectivity 
-# $url = 'https://url.dev.company.com'
-# $response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
-# If ($response.StatusCode -eq 200) {
-#     Write-Host "-- Able to connect to VPN." -ForegroundColor Green }
-# Else {
-#    Write-Host "FAILED to connect to VPN!  " -ForegroundColor Red 
-#    Write-Host "Check VPN connection first`n` " -ForegroundColor Red} 
-
-# testing connectivity to Google Drive
-$url = 'https://drive.google.com/drive/my-drive'
-$response= try {Invoke-WebRequest  -Method Head  $url -ErrorAction Continue } catch {$_.Exception.Response}
-if ($response.StatusCode -eq 200) {
-    Write-Host "-- Able to connect to Google Drive.  " -ForegroundColor Green  -NoNewline
+# testing connectivity to GitHub
+$url = 'https://github.com/mjoyce6500/'
+$HTTP_Request = [System.Net.WebRequest]::Create($url)
+$HTTP_Response = $HTTP_Request.GetResponse()
+$HTTP_Status = [int]$HTTP_Response.StatusCode
+if ($HTTP_Status -eq 200) {
+    Write-Host "-- Able to connect to GitHub.  " -ForegroundColor Green  -NoNewline
     Write-Host $url -ForegroundColor White  -NoNewline
     Write-Host "   Response code:  " -ForegroundColor Green -NoNewline
-    Write-Host $response.StatusCode }
+    Write-Host $HTTP_Status }
 else {
-    Write-Host "FAILED to connect to Google Drive!  " -ForegroundColor Red 
+    Write-Host "FAILED to connect to GitHub!  " -ForegroundColor Red 
 	Write-Host "Check Internet connection or shell proxy config first`n` " -ForegroundColor Red} 
 
 # Chocolatey profile
@@ -92,47 +84,18 @@ if (Test-Path($ChocolateyProfile) -ErrorAction SilentlyContinue)
     Import-Module "$ChocolateyProfile"
     write-host "-- Chocolatey profile found and imported. " -ForegroundColor Gray
     }
-if ((-not([string]::IsNullOrEmpty($defenderOptions))) -and ($Principal.IsInRole($AdminRole)))
+if (($defenderOptions.AntivirusEnabled -eq 'True') -and ($Principal.IsInRole($AdminRole) -and -not (choco.exe config list | grep "MPCmdRun.exe")))
     {
-    Write-Host "Since you are running as ADMINISTRATOR we are configuring anti-Virus settings in Choco" -ForegroundColor Cyan
-    Write-Host "Windows Defender found on host: " -ForegroundColor Cyan -NoNewline
-    Write-Host $env:COMPUTERNAME -ForegroundColor White
-    Write-Host "Windows Defender Enabled? " -ForegroundColor Cyan -NoNewline
-    Write-Host $defenderOptions.AntiVirusEnabled -ForegroundColor White
-    Write-Host "Setting Chocolatey to use Windows Defender." -ForegroundColor Cyan
-    choco feature enable -n viruscheck
-    choco config set genericVirusScannerPath "'C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.1807.18075-0\MPCmdRun.exe' -Scan"
-    }
-else
-    {
-    Write-Host "Your not running as ADMINISTRATOR or Windows Defender was not found running on host: " -ForegroundColor Cyan -NoNewline
-    Write-Host $env:COMPUTERNAME -ForegroundColor White
-    Write-Host " so we are not configuring anti-Virus settings in choco" -ForegroundColor Cyan
+    Write-Host "ADMINISTRATOR + Defender A/V (" -NoNewline
+    Write-Host $defenderOptions.AntiVirusEnabled + ")  =  " -ForegroundColor White -NoNewline
+    Write-Host "Chocolatey VirusCheck set to Defender." -ForegroundColor Cyan
+    choco config set --name = 'genericVirusScannerPath' --value = "'C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.2004.6-0\MpCmdRun.exe' -Scan"
     }
 
-# Chef org
-if ($env:CHEF_ORG)
-    {
-    Write-host "-- CHEF_ORG environment var set to '$env:CHEF_ORG'  " -ForegroundColor Gray
-    } 
-else
-    {
-    Write-host " (x) Unable to set CHEF_ORG envar correctly - please configure manually." -ForegroundColor Red
-    }
-# PowerShellGet is a toolset from MSFT @ https://github.com/PowerShell/PowerShellGet
-If (Test-Path $pubgit\PowerShellGet\Utilities)
-    { 
-    $PowerShellGet = (join-path $pubgit\PowerShellGet\Utilities\OfflinePowerShellGet "\OfflinePowerShellGetSetup.psm1")
-    Write-Host "Checking if PowerShellGet module is on " -ForegroundColor Cyan -NoNewline
-    Write-Host $env:COMPUTERNAME -ForegroundColor White
-    Import-Module "$PowerShellGet"
-    write-host "-- PowerShellGet found and imported. `n" -ForegroundColor Gray
-    }
 $result = New-Object -TypeName PSObject
 $result | Add-Member -MemberType Noteproperty -Name '$me' -Value $($me)
 $result | Add-Member -MemberType Noteproperty -Name '$downloads' -Value $($downloads)
 $result | Add-Member -MemberType Noteproperty -Name '$pubgit' -Value $($pubgit)
 $result | Add-Member -MemberType Noteproperty -Name '$tmp' -Value $($tmp)
-$result | Add-Member -MemberType Noteproperty -Name '$run' -Value $($run)
 $result | Add-Member -MemberType Noteproperty -Name Date -Value $($date)
 $result | Format-List
