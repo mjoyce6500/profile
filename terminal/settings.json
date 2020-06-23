@@ -73,6 +73,15 @@
                 "hidden": false,
                 "name": "openSUSE-42",
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402335}",
+                "hidden": false,
+                "name": "home pi",
+                "icon": "C:/Users/mjoyc/Git/profile/images/Pi_Logo.png",
+                "commandline": "ssh joyce@192.168.68.111",
+                "backgroundImage": "C:/Users/mjoyc/Git/profile/images/pi3.jfif",
+                "backgroundImageOpacity": 0.2
             }
         ]
     },
